@@ -2,6 +2,7 @@
 import React from 'react';
 import Layout from '@/components/layout/Layout';
 import Hero from '@/components/home/Hero';
+import CategoryBar from '@/components/home/CategoryBar';
 import FeaturedCategories from '@/components/home/FeaturedCategories';
 import PromoBanners from '@/components/home/PromoBanners';
 import FeaturedProducts from '@/components/home/FeaturedProducts';
@@ -17,6 +18,7 @@ const Index = () => {
           <p className="text-center text-sm font-medium">Get 15% cashback + FREE DELIVERY on your first order</p>
         </div>
       </div>
+      <CategoryBar />
       <Hero />
       <FeaturedCategories />
       <PromoBanners />
