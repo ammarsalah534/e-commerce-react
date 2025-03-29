@@ -7,8 +7,8 @@ import {
   Search, 
   Menu, 
   X, 
-  Heart, 
-  Home 
+  Heart,
+  Globe
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { Badge } from '@/components/ui/badge';
@@ -21,6 +21,12 @@ import {
   SheetTitle, 
   SheetTrigger 
 } from '@/components/ui/sheet';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header: React.FC = () => {
   const { totalItems } = useCart();
@@ -37,6 +43,13 @@ const Header: React.FC = () => {
     console.log('Searching for:', searchQuery);
   };
 
+  const languages = [
+    { code: 'en', name: 'English' },
+    { code: 'ar', name: 'Arabic' },
+    { code: 'fr', name: 'French' },
+    { code: 'es', name: 'Spanish' },
+  ];
+
   const categories = [
     { name: 'Electronics', path: '/category/electronics' },
     { name: 'Clothing', path: '/category/clothing' },
@@ -47,15 +60,82 @@ const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 bg-white shadow-sm z-50">
-      {/* Top Bar with Logo and Icons */}
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-shop-primary">
-          ShopEase
-        </Link>
+      {/* Top Bar with Logo, Search, Language, Cart, and Profile/Login */}
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex flex-col md:flex-row items-center gap-4">
+          {/* Logo */}
+          <Link to="/" className="text-2xl font-bold text-shop-primary">
+            ShopEase
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8 ml-10">
+          {/* Search Bar */}
+          <form onSubmit={handleSearch} className="flex-1 w-full">
+            <div className="relative">
+              <Input
+                type="search"
+                placeholder="Search for products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pr-10"
+              />
+              <Button 
+                type="submit" 
+                size="icon" 
+                variant="ghost" 
+                className="absolute right-0 top-0 h-full"
+              >
+                <Search className="h-5 w-5" />
+              </Button>
+            </div>
+          </form>
+
+          {/* Right-side items */}
+          <div className="flex items-center gap-4">
+            {/* Language Selector */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="text-gray-700">
+                  <Globe className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {languages.map((lang) => (
+                  <DropdownMenuItem key={lang.code}>
+                    {lang.name}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Wishlist */}
+            <Link to="/wishlist" className="text-gray-700 hidden md:block">
+              <Heart className="h-5 w-5" />
+            </Link>
+
+            {/* Profile/Login */}
+            <Link to="/login" className="text-gray-700">
+              <User className="h-5 w-5" />
+            </Link>
+
+            {/* Cart */}
+            <Link to="/cart" className="text-gray-700 relative">
+              <ShoppingBag className="h-5 w-5" />
+              {totalItems > 0 && (
+                <Badge className="absolute -top-2 -right-2 bg-shop-primary h-5 w-5 flex items-center justify-center rounded-full p-0">
+                  {totalItems}
+                </Badge>
+              )}
+            </Link>
+
+            {/* Mobile Menu Toggle */}
+            <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMenu}>
+              <Menu className="h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Navigation Menu - Desktop */}
+        <nav className="hidden md:flex space-x-8 mt-4">
           <Link to="/" className="text-gray-700 hover:text-shop-primary font-medium">
             Home
           </Link>
@@ -72,60 +152,6 @@ const Header: React.FC = () => {
             Contact
           </Link>
         </nav>
-
-        {/* Search, Cart, Account */}
-        <div className="flex items-center space-x-4">
-          {/* Search Icon / Form */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-gray-700">
-                <Search className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="top">
-              <SheetHeader>
-                <SheetTitle>Search Products</SheetTitle>
-              </SheetHeader>
-              <form onSubmit={handleSearch} className="mt-4">
-                <div className="flex gap-2">
-                  <Input
-                    type="search"
-                    placeholder="Search for products..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="flex-grow"
-                  />
-                  <Button type="submit">Search</Button>
-                </div>
-              </form>
-            </SheetContent>
-          </Sheet>
-
-          {/* Wishlist */}
-          <Link to="/wishlist" className="text-gray-700 hidden md:block">
-            <Heart className="h-5 w-5" />
-          </Link>
-
-          {/* Account */}
-          <Link to="/account" className="text-gray-700 hidden md:block">
-            <User className="h-5 w-5" />
-          </Link>
-
-          {/* Cart */}
-          <Link to="/cart" className="text-gray-700 relative">
-            <ShoppingBag className="h-5 w-5" />
-            {totalItems > 0 && (
-              <Badge className="absolute -top-2 -right-2 bg-shop-primary h-5 w-5 flex items-center justify-center rounded-full p-0">
-                {totalItems}
-              </Badge>
-            )}
-          </Link>
-
-          {/* Mobile Menu Toggle */}
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMenu}>
-            <Menu className="h-5 w-5" />
-          </Button>
-        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -138,9 +164,29 @@ const Header: React.FC = () => {
             </Button>
           </div>
           <div className="p-4 flex flex-col space-y-4 overflow-auto flex-grow">
+            {/* Mobile Search */}
+            <form onSubmit={handleSearch} className="mb-4">
+              <div className="relative">
+                <Input
+                  type="search"
+                  placeholder="Search for products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pr-10"
+                />
+                <Button 
+                  type="submit" 
+                  size="icon" 
+                  variant="ghost" 
+                  className="absolute right-0 top-0 h-full"
+                >
+                  <Search className="h-5 w-5" />
+                </Button>
+              </div>
+            </form>
+            
             <Link to="/" className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded" onClick={toggleMenu}>
-              <Home className="h-5 w-5" />
-              <span>Home</span>
+              Home
             </Link>
             <Link to="/products" className="p-2 hover:bg-gray-100 rounded" onClick={toggleMenu}>
               Products
@@ -173,6 +219,18 @@ const Header: React.FC = () => {
             <Link to="/contact" className="p-2 hover:bg-gray-100 rounded" onClick={toggleMenu}>
               Contact
             </Link>
+            
+            {/* Language Options */}
+            <div className="border-t my-2"></div>
+            <p className="font-medium">Language</p>
+            {languages.map((lang) => (
+              <button 
+                key={lang.code}
+                className="p-2 w-full text-left hover:bg-gray-100 rounded pl-4"
+              >
+                {lang.name}
+              </button>
+            ))}
           </div>
         </div>
       )}
