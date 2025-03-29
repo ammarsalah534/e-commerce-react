@@ -1,6 +1,6 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { toast } from "@/components/ui/sonner";
+import { toast } from 'sonner';
 
 // Define the product type
 export interface Product {

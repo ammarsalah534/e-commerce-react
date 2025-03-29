@@ -33,7 +33,7 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form';
-import { toast } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 import { 
   CreditCard, 
   CheckCircle2, 

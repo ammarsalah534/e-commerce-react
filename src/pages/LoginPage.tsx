@@ -25,7 +25,7 @@ import {
   TabsList, 
   TabsTrigger 
 } from '@/components/ui/tabs';
-import { toast } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { Eye, EyeOff } from 'lucide-react';
 
