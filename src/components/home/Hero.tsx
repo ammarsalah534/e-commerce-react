@@ -1,51 +1,76 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative bg-gradient-to-r from-shop-primary to-blue-900 text-white py-16 md:py-24 overflow-hidden">
-      {/* Decorative background shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white opacity-10"></div>
-        <div className="absolute top-1/2 left-0 w-64 h-64 rounded-full bg-white opacity-5"></div>
-        <div className="absolute bottom-0 right-1/3 w-32 h-32 rounded-full bg-white opacity-10"></div>
-      </div>
+    <section className="py-4 bg-yellow-400">
+      <div className="container mx-auto px-4">
+        <Carousel className="w-full">
+          <CarouselContent>
+            {/* First Banner */}
+            <CarouselItem>
+              <div className="relative rounded-md overflow-hidden h-64 md:h-80 bg-gray-600 w-full">
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-700/30 z-10"></div>
+                <div className="absolute top-0 left-0 right-0 p-6 z-20 flex flex-col h-full justify-center">
+                  <h2 className="text-white text-2xl md:text-3xl font-bold mb-2">Up to 65% off</h2>
+                  <p className="text-white text-lg mb-4">Building essentials</p>
+                  <Button className="bg-white text-gray-800 hover:bg-white/90 w-32">
+                    <Link to="/sale">SHOP NOW</Link>
+                  </Button>
+                </div>
+                <img 
+                  src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
+                  alt="Building essentials sale" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </CarouselItem>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Hero Content */}
-          <div className="animate-slide-in">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              Discover Amazing Products For Your Lifestyle
-            </h1>
-            <p className="mt-4 md:mt-6 text-lg md:text-xl text-blue-100 max-w-lg">
-              Shop the latest trends with exclusive deals on our carefully curated collection.
-            </p>
-            <div className="mt-8 md:mt-10 flex flex-wrap gap-4">
-              <Button size="lg" className="bg-white text-shop-primary hover:bg-blue-100 transition-colors">
-                <Link to="/products" className="flex items-center">
-                  Shop Now <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-shop-primary transition-colors">
-                <Link to="/categories">Explore Categories</Link>
-              </Button>
-            </div>
-          </div>
+            {/* Second Banner */}
+            <CarouselItem>
+              <div className="relative rounded-md overflow-hidden h-64 md:h-80 bg-blue-600 w-full">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-700/30 z-10"></div>
+                <div className="absolute top-0 left-0 right-0 p-6 z-20 flex flex-col h-full justify-center">
+                  <h2 className="text-white text-2xl md:text-3xl font-bold mb-2">Get 15% cashback</h2>
+                  <p className="text-white text-lg mb-4">Items on your first order</p>
+                  <Button className="bg-white text-blue-700 hover:bg-white/90 w-32">
+                    <Link to="/offers">FIRST15</Link>
+                  </Button>
+                </div>
+                <img 
+                  src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
+                  alt="Cashback offer" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </CarouselItem>
 
-          {/* Hero Image */}
-          <div className="hidden md:block animate-slide-up">
-            <img 
-              src="https://images.unsplash.com/photo-1605902711622-cfb43c4437b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyMzMzMDEyNA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" 
-              alt="Shopping product display" 
-              className="w-full h-auto rounded-lg shadow-xl transform rotate-2 hover:rotate-0 transition-transform duration-500"
-              style={{ maxHeight: '500px', objectFit: 'cover' }}
-            />
-          </div>
-        </div>
+            {/* Third Banner */}
+            <CarouselItem>
+              <div className="relative rounded-md overflow-hidden h-64 md:h-80 bg-indigo-600 w-full">
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-700 to-indigo-700/30 z-10"></div>
+                <div className="absolute top-0 left-0 right-0 p-6 z-20 flex flex-col h-full justify-center">
+                  <h2 className="text-white text-2xl md:text-3xl font-bold mb-2">The Warehouse Sale</h2>
+                  <p className="text-white text-lg mb-4">Clearance up to 70% off</p>
+                  <Button className="bg-white text-indigo-700 hover:bg-white/90 w-40">
+                    <Link to="/clearance">SHOP & SAVE</Link>
+                  </Button>
+                </div>
+                <img 
+                  src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
+                  alt="Warehouse sale" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious className="left-2" />
+          <CarouselNext className="right-2" />
+        </Carousel>
       </div>
     </section>
   );

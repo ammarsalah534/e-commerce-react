@@ -1,90 +1,98 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 
 interface Category {
   id: string;
   name: string;
   image: string;
-  count: number;
 }
 
 const FeaturedCategories: React.FC = () => {
   // Mock data - would come from your backend in a real application
   const categories: Category[] = [
     {
-      id: 'electronics',
-      name: 'Electronics',
-      image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-      count: 120
+      id: 'grocery',
+      name: 'Grocery',
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
     },
     {
-      id: 'clothing',
-      name: 'Clothing',
-      image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-      count: 240
+      id: 'clearance',
+      name: 'Clearance Deals',
+      image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+    },
+    {
+      id: 'gift-cards',
+      name: 'Gift Cards',
+      image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1040&q=80',
+    },
+    {
+      id: 'womens-fashion',
+      name: 'Women\'s Fashion',
+      image: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=986&q=80',
+    },
+    {
+      id: 'mens-fashion',
+      name: 'Men\'s Fashion',
+      image: 'https://images.unsplash.com/photo-1617137968427-85924c800a22?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',
+    },
+    {
+      id: 'kids-fashion',
+      name: 'Kids\' Fashion',
+      image: 'https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1072&q=80',
+    },
+    {
+      id: 'mobiles',
+      name: 'Mobiles',
+      image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2127&q=80',
+    },
+    {
+      id: 'laptops',
+      name: 'Laptops',
+      image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',
     },
     {
       id: 'home-kitchen',
       name: 'Home & Kitchen',
       image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-      count: 180
     },
     {
-      id: 'beauty',
-      name: 'Beauty',
-      image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
-      count: 95
+      id: 'fragrances',
+      name: 'Fragrances',
+      image: 'https://images.unsplash.com/photo-1619994403073-2cec844b8e63?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     },
     {
-      id: 'sports',
-      name: 'Sports & Outdoors',
-      image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-      count: 75
+      id: 'baby',
+      name: 'Baby',
+      image: 'https://images.unsplash.com/photo-1607320070344-6d29b413bc02?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     },
     {
-      id: 'toys',
+      id: 'toys-games',
       name: 'Toys & Games',
-      image: 'https://images.unsplash.com/photo-1584399721030-c6eef1af9235?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
-      count: 60
+      image: 'https://images.unsplash.com/photo-1584399521630-ac638486f51e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
     }
   ];
 
   return (
-    <section className="py-12 md:py-20 bg-gray-50">
+    <section className="py-6 bg-yellow-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Shop by Category</h2>
-          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            Browse our wide range of products across popular categories
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-4">
           {categories.map((category) => (
             <Link 
               key={category.id}
               to={`/category/${category.id}`}
-              className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="flex flex-col items-center group"
             >
-              <div className="h-60 overflow-hidden">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-yellow-400 bg-white mb-2">
                 <img
                   src={category.image}
                   alt={category.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end">
-                  <div>
-                    <h3 className="text-white text-xl font-bold">{category.name}</h3>
-                    <p className="text-gray-200 mt-1">{category.count} Products</p>
-                  </div>
-                  <span className="bg-white/20 rounded-full p-2 text-white group-hover:bg-shop-primary transition-colors duration-300">
-                    <ArrowRight className="h-5 w-5" />
-                  </span>
-                </div>
               </div>
+              <span className="text-xs sm:text-sm text-center font-medium text-gray-800">
+                {category.name}
+              </span>
             </Link>
           ))}
         </div>
