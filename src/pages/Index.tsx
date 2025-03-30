@@ -13,11 +13,6 @@ import NewsletterSignup from '@/components/home/NewsletterSignup';
 const Index = () => {
   return (
     <Layout>
-      <div className="bg-yellow-400 py-2">
-        <div className="container mx-auto px-4">
-          <p className="text-center text-sm font-medium">Get 15% cashback + FREE DELIVERY on your first order</p>
-        </div>
-      </div>
       <CategoryBar />
       <Hero />
       <FeaturedCategories />

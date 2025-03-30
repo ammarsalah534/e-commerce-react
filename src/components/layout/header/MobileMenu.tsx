@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { X, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -20,19 +21,19 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   toggleMenu,
   handleSearch,
 }) => {
+  const { t, language, setLanguage } = useLanguage();
+
   const categories = [
-    { name: 'Electronics', path: '/category/electronics' },
-    { name: 'Clothing', path: '/category/clothing' },
-    { name: 'Home & Kitchen', path: '/category/home-kitchen' },
-    { name: 'Beauty', path: '/category/beauty' },
-    { name: 'Toys', path: '/category/toys' },
+    { name: t('category.electronics'), path: '/category/electronics' },
+    { name: t('category.fashion'), path: '/category/fashion' },
+    { name: t('category.home'), path: '/category/home-kitchen' },
+    { name: t('category.beauty'), path: '/category/beauty' },
+    { name: t('category.toys'), path: '/category/toys' },
   ];
 
   const languages = [
     { code: 'en', name: 'English' },
-    { code: 'ar', name: 'Arabic' },
-    { code: 'fr', name: 'French' },
-    { code: 'es', name: 'Spanish' },
+    { code: 'ar', name: 'العربية' },
   ];
 
   if (!isOpen) return null;
@@ -40,7 +41,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   return (
     <div className="fixed inset-0 bg-white z-50 flex flex-col md:hidden animate-fade-in">
       <div className="p-4 flex justify-between items-center border-b">
-        <span className="text-xl font-semibold">Menu</span>
+        <span className="text-xl font-semibold">{t('nav.menu')}</span>
         <Button variant="ghost" size="icon" onClick={toggleMenu}>
           <X className="h-5 w-5" />
         </Button>
@@ -51,7 +52,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           <div className="relative">
             <Input
               type="search"
-              placeholder="Search for products..."
+              placeholder={t('filter.search')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pr-10"
@@ -68,13 +69,13 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         </form>
         
         <Link to="/" className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded" onClick={toggleMenu}>
-          Home
+          {t('nav.home')}
         </Link>
         <Link to="/products" className="p-2 hover:bg-gray-100 rounded" onClick={toggleMenu}>
-          Products
+          {t('nav.products')}
         </Link>
         <div className="border-t my-2"></div>
-        <p className="font-medium">Categories</p>
+        <p className="font-medium">{t('nav.categories')}</p>
         {categories.map((category) => (
           <Link 
             key={category.path} 
@@ -87,28 +88,31 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         ))}
         <div className="border-t my-2"></div>
         <Link to="/account" className="p-2 hover:bg-gray-100 rounded" onClick={toggleMenu}>
-          My Account
+          {t('nav.account')}
         </Link>
         <Link to="/wishlist" className="p-2 hover:bg-gray-100 rounded" onClick={toggleMenu}>
-          Wishlist
+          {t('nav.wishlist')}
         </Link>
         <Link to="/cart" className="p-2 hover:bg-gray-100 rounded" onClick={toggleMenu}>
-          Cart
+          {t('nav.cart')}
         </Link>
         <Link to="/about" className="p-2 hover:bg-gray-100 rounded" onClick={toggleMenu}>
-          About Us
+          {t('nav.about')}
         </Link>
         <Link to="/contact" className="p-2 hover:bg-gray-100 rounded" onClick={toggleMenu}>
-          Contact
+          {t('nav.contact')}
         </Link>
         
         {/* Language Options */}
         <div className="border-t my-2"></div>
-        <p className="font-medium">Language</p>
+        <p className="font-medium">{t('nav.language')}</p>
         {languages.map((lang) => (
           <button 
             key={lang.code}
-            className="p-2 w-full text-left hover:bg-gray-100 rounded pl-4"
+            className={`p-2 w-full text-left hover:bg-gray-100 rounded pl-4 ${
+              language === lang.code ? 'bg-gray-100' : ''
+            }`}
+            onClick={() => setLanguage(lang.code as 'en' | 'ar')}
           >
             {lang.name}
           </button>

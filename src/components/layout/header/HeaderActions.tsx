@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Globe, Heart, User, ShoppingBag, Menu } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,26 +19,36 @@ interface HeaderActionsProps {
 
 const HeaderActions = ({ toggleMenu }: HeaderActionsProps) => {
   const { totalItems } = useCart();
+  const { language, setLanguage, t } = useLanguage();
 
   const languages = [
     { code: 'en', name: 'English' },
-    { code: 'ar', name: 'Arabic' },
-    { code: 'fr', name: 'French' },
-    { code: 'es', name: 'Spanish' },
+    { code: 'ar', name: 'العربية' },
   ];
+
+  const handleLanguageChange = (lang: 'en' | 'ar') => {
+    setLanguage(lang);
+  };
 
   return (
     <div className="flex items-center gap-4">
       {/* Language Selector */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" className="text-gray-700">
+          <Button variant="ghost" size="icon" className="text-gray-700 relative">
             <Globe className="h-5 w-5" />
+            <span className="absolute -bottom-2 text-[10px] font-bold">
+              {language.toUpperCase()}
+            </span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           {languages.map((lang) => (
-            <DropdownMenuItem key={lang.code}>
+            <DropdownMenuItem 
+              key={lang.code}
+              onClick={() => handleLanguageChange(lang.code as 'en' | 'ar')}
+              className={language === lang.code ? "bg-muted" : ""}
+            >
               {lang.name}
             </DropdownMenuItem>
           ))}
