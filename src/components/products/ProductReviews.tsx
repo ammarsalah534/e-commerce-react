@@ -49,7 +49,8 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ summary, reviews }) => 
             ))}
           </div>
           <div className="text-sm text-gray-500 mt-1">
-            {t('product.basedOnReviews', { count: summary.total })}
+            {/* Fix: Using a template string to format the message instead of passing multiple arguments to t() */}
+            {t('product.basedOnReviews').replace('{}', summary.total.toString())}
           </div>
         </div>
         
