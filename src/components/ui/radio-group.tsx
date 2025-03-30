@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 import { Circle } from "lucide-react"
@@ -39,4 +40,56 @@ const RadioGroupItem = React.forwardRef<
 })
 RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName
 
-export { RadioGroup, RadioGroupItem }
+// Create a specialized PaymentMethod radio component that includes an icon and better styling
+const PaymentMethodRadioGroup = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
+>(({ className, ...props }, ref) => {
+  return (
+    <RadioGroupPrimitive.Root
+      className={cn("grid gap-2", className)}
+      {...props}
+      ref={ref}
+    />
+  )
+})
+PaymentMethodRadioGroup.displayName = "PaymentMethodRadioGroup"
+
+// Radio item specifically for payment methods with icon support
+const PaymentMethodRadioItem = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & {
+    icon?: React.ReactNode;
+    description?: string;
+  }
+>(({ className, icon, description, children, ...props }, ref) => {
+  return (
+    <div className="relative">
+      <RadioGroupPrimitive.Item
+        ref={ref}
+        className={cn(
+          "peer sr-only",
+          className
+        )}
+        {...props}
+      >
+      </RadioGroupPrimitive.Item>
+      <label
+        className="flex items-center justify-between border rounded-md p-4 cursor-pointer transition-all peer-data-[state=checked]:border-primary peer-data-[state=checked]:ring-1 peer-data-[state=checked]:ring-primary peer-data-[state=checked]:bg-primary/5 hover:bg-muted/50"
+        htmlFor={props.id}
+      >
+        <div className="flex items-center gap-3">
+          {icon && <div className="text-muted-foreground flex-shrink-0">{icon}</div>}
+          <div>
+            <div className="font-medium">{children}</div>
+            {description && <div className="text-sm text-muted-foreground">{description}</div>}
+          </div>
+        </div>
+        <Circle className="h-2 w-2 opacity-0 fill-primary text-primary peer-data-[state=checked]:opacity-100" />
+      </label>
+    </div>
+  )
+})
+PaymentMethodRadioItem.displayName = "PaymentMethodRadioItem"
+
+export { RadioGroup, RadioGroupItem, PaymentMethodRadioGroup, PaymentMethodRadioItem }
