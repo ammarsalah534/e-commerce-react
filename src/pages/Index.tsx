@@ -6,6 +6,7 @@ import CategoryBar from '@/components/home/CategoryBar';
 import FeaturedCategories from '@/components/home/FeaturedCategories';
 import PromoBanners from '@/components/home/PromoBanners';
 import FeaturedProducts from '@/components/home/FeaturedProducts';
+import TrendingProducts from '@/components/home/TrendingProducts';
 import PromoSection from '@/components/home/PromoSection';
 import Testimonials from '@/components/home/Testimonials';
 import NewsletterSignup from '@/components/home/NewsletterSignup';
@@ -19,6 +20,7 @@ const Index = () => {
       <PromoBanners />
       <FeaturedProducts />
       <PromoSection />
+      <TrendingProducts />
       <Testimonials />
       <NewsletterSignup />
     </Layout>

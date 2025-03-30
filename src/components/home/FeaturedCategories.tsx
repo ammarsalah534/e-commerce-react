@@ -1,6 +1,13 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from "@/components/ui/carousel";
 
 interface Category {
   id: string;
@@ -76,26 +83,39 @@ const FeaturedCategories: React.FC = () => {
   return (
     <section className="py-6 bg-yellow-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-4">
-          {categories.map((category) => (
-            <Link 
-              key={category.id}
-              to={`/category/${category.id}`}
-              className="flex flex-col items-center group"
-            >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-yellow-400 bg-white mb-2">
-                <img
-                  src={category.image}
-                  alt={category.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <span className="text-xs sm:text-sm text-center font-medium text-gray-800">
-                {category.name}
-              </span>
-            </Link>
-          ))}
+        <div className="mb-6">
+          <h3 className="text-xl font-semibold text-gray-800">Shop by Category</h3>
         </div>
+        
+        <Carousel className="w-full"
+          opts={{
+            align: "start",
+            loop: true,
+          }}>
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {categories.map((category) => (
+              <CarouselItem key={category.id} className="pl-2 md:pl-4 sm:basis-1/3 md:basis-1/4 lg:basis-1/6">
+                <Link 
+                  to={`/category/${category.id}`}
+                  className="flex flex-col items-center group"
+                >
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-yellow-400 bg-white mb-2">
+                    <img
+                      src={category.image}
+                      alt={category.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
+                  <span className="text-xs sm:text-sm text-center font-medium text-gray-800">
+                    {category.name}
+                  </span>
+                </Link>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-0 sm:-left-4" />
+          <CarouselNext className="right-0 sm:-right-4" />
+        </Carousel>
       </div>
     </section>
   );

@@ -5,6 +5,13 @@ import ProductCard from '@/components/products/ProductCard';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Product } from '@/context/CartContext';
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from "@/components/ui/carousel";
 
 const FeaturedProducts: React.FC = () => {
   // Mock data - would come from your backend in a real application
@@ -75,9 +82,6 @@ const FeaturedProducts: React.FC = () => {
     }
   ];
 
-  // Display only a subset of products
-  const featuredProducts = products.slice(0, 4);
-
   return (
     <section className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-4">
@@ -95,11 +99,23 @@ const FeaturedProducts: React.FC = () => {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featuredProducts.map(product => (
-            <ProductCard key={product.id} product={product} featured={true} />
-          ))}
-        </div>
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {products.map(product => (
+              <CarouselItem key={product.id} className="pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <ProductCard product={product} featured={true} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-0 sm:-left-4" />
+          <CarouselNext className="right-0 sm:-right-4" />
+        </Carousel>
       </div>
     </section>
   );
