@@ -6,10 +6,10 @@ import {
 } from '@/components/ui/radio-group';
 import { 
   CreditCard, 
-  Paypal, 
+  CircleDollarSign, 
   Apple, 
   Wallet, 
-  TruckDelivery, 
+  Truck, 
   AlertCircle 
 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -37,7 +37,7 @@ const PaymentMethodSelector: React.FC<PaymentMethodSelectorProps> = ({
       id: 'paypal',
       name: 'PayPal',
       description: 'Fast and secure payment with PayPal',
-      icon: <Paypal className="h-5 w-5" />,
+      icon: <CircleDollarSign className="h-5 w-5" />,
     },
     {
       id: 'apple_pay',
@@ -55,7 +55,7 @@ const PaymentMethodSelector: React.FC<PaymentMethodSelectorProps> = ({
       id: 'cash_on_delivery',
       name: 'Pay on Delivery',
       description: 'Pay with cash when your order arrives',
-      icon: <TruckDelivery className="h-5 w-5" />,
+      icon: <Truck className="h-5 w-5" />,
     },
   ];
 
