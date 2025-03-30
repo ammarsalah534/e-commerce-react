@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
@@ -729,50 +728,3 @@ const ProductsPage = () => {
             {/* Products Grid */}
             <div className="md:w-3/4 lg:w-4/5">
               {sortedProducts.length > 0 ? (
-                <div className="space-y-8">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                    {currentProducts.map(product => (
-                      <ProductCard key={product.id} product={product} />
-                    ))}
-                  </div>
-                  
-                  {/* Pagination */}
-                  {totalPages > 1 && (
-                    <Pagination className="my-8">
-                      <PaginationContent>
-                        <PaginationPrevious 
-                          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                          disabled={currentPage === 1}
-                          aria-disabled={currentPage === 1}
-                          className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
-                        />
-                        
-                        {paginationItems()}
-                        
-                        <PaginationNext 
-                          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                          disabled={currentPage === totalPages}
-                          aria-disabled={currentPage === totalPages}
-                          className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
-                        />
-                      </PaginationContent>
-                    </Pagination>
-                  )}
-                </div>
-              ) : (
-                <div className="text-center py-12 bg-white rounded-lg shadow-sm">
-                  <p className="text-gray-500 mb-4">{t('products.noProductsFound')}</p>
-                  <Button variant="outline" onClick={resetFilters}>
-                    {t('filter.resetFilters')}
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </Layout>
-  );
-};
-
-export default ProductsPage;
