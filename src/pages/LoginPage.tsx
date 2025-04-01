@@ -102,7 +102,7 @@ const LoginPage: React.FC = () => {
                     {t('auth.rememberMe')}
                   </Label>
                 </div>
-                <Link to="/reset-password" className="text-sm text-shop-primary hover:underline">
+                <Link to="/forgot-password" className="text-sm text-shop-primary hover:underline">
                   {t('auth.forgotPassword')}
                 </Link>
               </div>
